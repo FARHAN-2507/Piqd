@@ -2,11 +2,12 @@
 
 import { useState, useCallback, useRef } from 'react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Spinner } from '@/components/ui/spinner'
-import { Upload, X, CheckCircle, AlertCircle, Sparkles } from 'lucide-react'
+import { Upload, X, CheckCircle, AlertCircle, Sparkles, Home } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'
@@ -123,14 +124,20 @@ export default function UploadPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-yellow-5/20 to-white">
-      <header className="bg-white/80 backdrop-blur-sm border-b border-yellow-100 sticky top-0 z-50">
-        <div className="container mx-auto py-5 px-4">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg">
-              <Sparkles className="h-7 w-7 text-white" />
-            </div>
-            <h1 className="text-2xl font-extrabold tracking-tight">New Photo Dump</h1>
-          </div>
+      <header className="bg-white/90 backdrop-blur-md border-b border-yellow-100 sticky top-0 z-50">
+        <div className="container mx-auto py-4 px-4">
+          <nav className="flex items-center justify-between">
+            <Link href="/" className="flex items-center gap-3 group">
+              <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
+                <Sparkles className="h-6 w-6 text-white" />
+              </div>
+              <span className="text-xl font-extrabold tracking-tight">Piqd</span>
+            </Link>
+            <Link href="/" className="flex items-center gap-2 text-gray-600 hover:text-yellow-600 transition-colors font-medium">
+              <Home className="h-5 w-5" />
+              Home
+            </Link>
+          </nav>
         </div>
       </header>
 

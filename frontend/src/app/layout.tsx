@@ -1,15 +1,19 @@
 import type { Metadata } from 'next'
-import { Outfit } from 'next/font/google'
+import { Poppins } from 'next/font/google'
 import './globals.css'
 
-const outfit = Outfit({ 
+const poppins = Poppins({ 
   subsets: ['latin'],
-  variable: '--font-outfit',
+  weight: ['400', '500', '600', '700', '800', '900'],
+  variable: '--font-poppins',
 })
 
 export const metadata: Metadata = {
   title: 'Piqd - AI Photo Dump Curator',
   description: 'Automatically select the best photos for your Instagram dump and generate captions in minutes',
+  icons: {
+    icon: '/favicon.ico',
+  }
 }
 
 export default function RootLayout({
@@ -18,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={outfit.variable}>
+    <html lang="en" className={poppins.variable}>
       <body className="font-sans antialiased">{children}</body>
     </html>
   )
