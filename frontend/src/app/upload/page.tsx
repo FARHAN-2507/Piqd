@@ -85,6 +85,15 @@ export default function UploadPage() {
 
   const getValidCount = () => files.filter(f => f.status === 'valid').length
 
+  const fileToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.onload = () => resolve(reader.result as string)
+      reader.onerror = reject
+      reader.readAsDataURL(file)
+    })
+  }
+
   const handleUpload = async () => {
     const validFiles = files.filter(f => f.status === 'valid')
     
@@ -104,10 +113,14 @@ export default function UploadPage() {
       
       const project = await projectRes.json()
       
-      const photos = validFiles.map(f => ({
-        url: f.preview,
-        name: f.file.name
-      }))
+      const photos = []
+      for (const f of validFiles) {
+        const base64 = await fileToBase64(f.file)
+        photos.push({
+          url: base64,
+          name: f.file.name
+        })
+      }
       
       await fetch(`${API_URL}/api/projects/${project.id}/photos`, {
         method: 'POST',
